@@ -17,7 +17,9 @@ if not os.path.exists(MEMORY_FILE):
 @app.route('/webhook', methods=['POST'])
 def telegram_webhook():
     data = request.json
-    print("📩 Incoming update:", json.dumps(data, indent=2))  # <--- confirm in Render
+    print("📩 Incoming update:", json.dumps(data, indent=2))
+    ...
+
 
     if "message" in data:
         message = data["message"]
