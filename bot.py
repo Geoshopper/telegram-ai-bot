@@ -13,6 +13,10 @@ MEMORY_FILE = 'memory.json'
 if not os.path.exists(MEMORY_FILE):
     with open(MEMORY_FILE, 'w') as f:
         json.dump({"known_questions": []}, f)
+        
+@app.route('/test', methods=['GET'])
+def test():
+    return "✅ Flask is working!"
 
 @app.route('/webhook', methods=['POST'])
 def telegram_webhook():
