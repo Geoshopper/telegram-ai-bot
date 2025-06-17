@@ -14,10 +14,10 @@ if not os.path.exists(MEMORY_FILE):
     with open(MEMORY_FILE, 'w') as f:
         json.dump({"known_questions": []}, f)
 
-@app.route('/' + TELEGRAM_TOKEN, methods=['POST'])
+@app.route('/webhook', methods=['POST'])
 def telegram_webhook():
     data = request.json
-    print("📩 Incoming update:", json.dumps(data, indent=2))  # Log for debugging
+    print("📩 Incoming update:", json.dumps(data, indent=2))  # <--- confirm in Render
 
     if "message" in data:
         message = data["message"]
