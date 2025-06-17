@@ -17,17 +17,19 @@ if not os.path.exists(MEMORY_FILE):
 @app.route(f'/{TELEGRAM_TOKEN}', methods=['POST'])
 def telegram_webhook():
     data = request.json
+    print("📩 Incoming update:", json.dumps(data, indent=2))  # Log for debugging
 
-    # Check if it's a message and the bot is tagged
-    if "message" in data and "text" in data["message"]:
-        chat_id = data["message"]["chat"]["id"]
-        text = data["message"]["text"]
+    if "message" in data:
+        message = data["message"]
+        text = message.get("text", "")
         if f"@{BOT_USERNAME}" in text:
+            chat_id = message["chat"]["id"]
             question = text.replace(f"@{BOT_USERNAME}", "").strip()
             answer = get_openai_answer(question)
             send_message(chat_id, answer)
 
     return 'ok'
+
 
 def get_openai_answer(question):
     # Load memory
