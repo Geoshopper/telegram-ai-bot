@@ -18,8 +18,6 @@ if not os.path.exists(MEMORY_FILE):
 def telegram_webhook():
     data = request.json
     print("📩 Incoming update:", json.dumps(data, indent=2))
-    ...
-
 
     if "message" in data:
         message = data["message"]
@@ -31,6 +29,7 @@ def telegram_webhook():
             send_message(chat_id, answer)
 
     return 'ok'
+
 
 
 def get_openai_answer(question):
